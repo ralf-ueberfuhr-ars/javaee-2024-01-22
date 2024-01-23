@@ -1,12 +1,11 @@
 package de.samples.java.annotations;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class Person {
 
     private final String name;
-
-    public Person(String name) {
-        this.name = name;
-    }
 
     @SayHello(prefix = "This is a person saying:")
     public String sayHello() {

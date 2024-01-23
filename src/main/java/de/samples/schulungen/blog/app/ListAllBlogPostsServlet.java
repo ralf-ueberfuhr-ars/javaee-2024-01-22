@@ -26,7 +26,7 @@ public class ListAllBlogPostsServlet extends HttpServlet {
       BlogPost
         .builder()
         .title("Mein erster BlogPost")
-        .content("Lorem Ipsum...")
+        .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
         .timestamp(LocalDateTime.now())
         .build(),
       BlogPost

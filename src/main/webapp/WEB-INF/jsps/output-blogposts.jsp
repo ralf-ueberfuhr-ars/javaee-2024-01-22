@@ -8,8 +8,8 @@
 <body>
   <h1>Blog Posts</h1>
   <c:forEach items="${blogposts}" var="bp">
-    <h2>${bp.title}</h2>
-    <p>${bp.content}</p>
+    <h2><c:out value="${bp.title}" /></h2>
+    <p><c:out value="${bp.content}"/></p>
   </c:forEach>
 </body>
 </html>

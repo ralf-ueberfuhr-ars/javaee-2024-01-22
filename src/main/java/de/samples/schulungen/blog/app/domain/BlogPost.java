@@ -1,11 +1,11 @@
-package de.samples.schulungen.blog.app;
+package de.samples.schulungen.blog.app.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 @Builder
 public class BlogPost {
 
-    private String title;
-    private String content;
-    private LocalDateTime timestamp;
+  private UUID id;
+  private String title;
+  private String content;
+  private LocalDateTime timestamp;
 
 }

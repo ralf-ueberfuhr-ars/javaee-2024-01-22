@@ -1,4 +1,4 @@
-package de.samples.schulungen.blog.app;
+package de.samples.schulungen.blog.app.boundary;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

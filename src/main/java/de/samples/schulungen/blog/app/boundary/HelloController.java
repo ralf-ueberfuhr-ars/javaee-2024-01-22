@@ -1,4 +1,4 @@
-package de.samples.schulungen.blog.app;
+package de.samples.schulungen.blog.app.boundary;
 
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;

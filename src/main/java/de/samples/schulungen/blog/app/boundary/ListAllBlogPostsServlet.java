@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @WebServlet("/list-blogposts")

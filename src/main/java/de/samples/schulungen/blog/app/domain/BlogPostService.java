@@ -11,6 +11,10 @@ public class BlogPostService {
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
+  public long count() {
+    return blogPosts.size();
+  }
+
   public Stream<BlogPost> findAll() {
     return blogPosts.values().stream();
   }

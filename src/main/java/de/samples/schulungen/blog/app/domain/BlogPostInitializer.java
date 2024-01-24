@@ -17,20 +17,22 @@ public class BlogPostInitializer {
     @Initialized(ApplicationScoped.class)
     Object pointless
   ) {
-    service.add(
-      BlogPost
-        .builder()
-        .title("Mein erster BlogPost mit Initializer")
-        .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
-        .build()
-    );
-    service.add(
-      BlogPost
-        .builder()
-        .title("Mein zweiter BlogPost")
-        .content("Tralala")
-        .build()
-    );
+    if(service.count()<1) {
+      service.add(
+        BlogPost
+          .builder()
+          .title("Mein erster BlogPost mit Initializer")
+          .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
+          .build()
+      );
+      service.add(
+        BlogPost
+          .builder()
+          .title("Mein zweiter BlogPost")
+          .content("Tralala")
+          .build()
+      );
+    }
   }
 
 }

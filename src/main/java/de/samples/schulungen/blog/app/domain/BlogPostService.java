@@ -3,10 +3,8 @@ package de.samples.schulungen.blog.app.domain;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
 
 @ApplicationScoped
 public class BlogPostService {
@@ -32,12 +30,17 @@ public class BlogPostService {
     );
   }
 
-  public Collection<BlogPost> findAll() {
-    return blogPosts.values();
+  public Stream<BlogPost> findAll() {
+    return blogPosts.values().stream();
   }
 
-  public BlogPost findById(UUID id) {
-    return blogPosts.get(id);
+  public Stream<BlogPost> findAllByTitle(String title) {
+    return findAll()
+      .filter(blogPost -> blogPost.getTitle().toLowerCase().contains(title.toLowerCase()));
+  }
+
+  public Optional<BlogPost> findById(UUID id) {
+    return Optional.ofNullable(blogPosts.get(id));
   }
 
   public void add(BlogPost post) {

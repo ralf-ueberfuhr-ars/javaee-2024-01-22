@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @WebServlet("/list-blogposts")
 public class ListAllBlogPostsServlet extends HttpServlet {
@@ -25,7 +26,14 @@ public class ListAllBlogPostsServlet extends HttpServlet {
   ) throws ServletException, IOException {
 
     // BlogPosts ermitteln - Dummy!
-    Collection<BlogPost> blogposts = service.findAll();
+    Collection<BlogPost> blogposts = service
+      .findAll()
+      .collect(Collectors.toList());
+
+    //BlogPost result = service
+      //.findById(UUID.randomUUID())
+      //.orElseThrow(IllegalStateException::new);
+      //.orElseGet(() -> BlogPost.builder().build());
 
     req.setAttribute("blogposts", blogposts);
 

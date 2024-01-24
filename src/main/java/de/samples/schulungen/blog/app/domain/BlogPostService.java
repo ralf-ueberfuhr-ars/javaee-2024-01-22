@@ -11,13 +11,13 @@ public class BlogPostService {
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
+  // TODO externalize
   {
     this.add(
       BlogPost
         .builder()
         .title("Mein erster BlogPost mit CDI")
         .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
-        .timestamp(LocalDateTime.now())
         .build()
     );
     this.add(
@@ -25,7 +25,6 @@ public class BlogPostService {
         .builder()
         .title("Mein zweiter BlogPost")
         .content("Tralala")
-        .timestamp(LocalDateTime.now())
         .build()
     );
   }
@@ -45,6 +44,7 @@ public class BlogPostService {
 
   public void add(BlogPost post) {
     post.setId(UUID.randomUUID());
+    post.setTimestamp(LocalDateTime.now());
     blogPosts.put(post.getId(), post);
   }
 

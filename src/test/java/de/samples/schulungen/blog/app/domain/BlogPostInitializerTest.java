@@ -11,8 +11,7 @@ class BlogPostInitializerTest {
   void shouldAddWelcomeBlogPostsToService() {
     // Setup / Arrange / Given
     BlogPostService service = mock(BlogPostService.class);
-    BlogPostInitializer sut = new BlogPostInitializer();
-    sut.service = service;
+    BlogPostInitializer sut = new BlogPostInitializer(service);
     when(service.count()).thenReturn(0L);
     // Act / When
     sut.init(new Object());
@@ -24,8 +23,7 @@ class BlogPostInitializerTest {
   void shouldNotAddWelcomeBlogPostsWhenAlreadyExisting() {
     // Setup / Arrange / Given
     BlogPostService service = mock(BlogPostService.class);
-    BlogPostInitializer sut = new BlogPostInitializer();
-    sut.service = service;
+    BlogPostInitializer sut = new BlogPostInitializer(service);
     when(service.count()).thenReturn(1L);
     // Act / When
     sut.init(new Object());

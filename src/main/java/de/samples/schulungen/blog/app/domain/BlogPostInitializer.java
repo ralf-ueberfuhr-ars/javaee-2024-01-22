@@ -4,13 +4,13 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
 
 @ApplicationScoped
+@RequiredArgsConstructor(onConstructor_ = @Inject)
 public class BlogPostInitializer {
 
-  // TODO Constructor Injection
-  @Inject
-  BlogPostService service;
+  private final BlogPostService service;
 
   public void init(
     @Observes

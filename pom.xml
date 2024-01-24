@@ -17,8 +17,38 @@
     <lombok.version>1.18.30</lombok.version>
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <jakarta.servlet.jsp.jstl-api.version>2.0.0</jakarta.servlet.jsp.jstl-api.version>
+    <junit-bom.version>5.10.1</junit-bom.version>
+    <mockito-bom.version>5.9.0</mockito-bom.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-bom</artifactId>
+        <version>${mockito-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+   </dependencies>
+  </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
     <dependency>
       <groupId>jakarta.platform</groupId>

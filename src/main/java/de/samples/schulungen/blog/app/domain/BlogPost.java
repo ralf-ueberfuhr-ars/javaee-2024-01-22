@@ -1,8 +1,6 @@
 package de.samples.schulungen.blog.app.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,6 +9,8 @@ import java.util.UUID;
 @Setter
 //@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BlogPost {
 
   private UUID id;

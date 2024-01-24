@@ -3,34 +3,27 @@ package de.samples.schulungen.blog.app.domain;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
+import lombok.RequiredArgsConstructor;
 
 @ApplicationScoped
+@RequiredArgsConstructor(onConstructor_ = @Inject)
 public class BlogPostInitializer {
 
-  // TODO Constructor Injection
-  @Inject
-  BlogPostService service;
+  private final BlogPostService service;
+  private final Instance<BlogPost> blogPosts;
 
   public void init(
     @Observes
     @Initialized(ApplicationScoped.class)
     Object pointless
   ) {
-    service.add(
-      BlogPost
-        .builder()
-        .title("Mein erster BlogPost mit Initializer")
-        .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
-        .build()
-    );
-    service.add(
-      BlogPost
-        .builder()
-        .title("Mein zweiter BlogPost")
-        .content("Tralala")
-        .build()
-    );
+    if (service.count() < 1) {
+      blogPosts
+        .stream()
+        .forEach(service::add);
+    }
   }
 
 }

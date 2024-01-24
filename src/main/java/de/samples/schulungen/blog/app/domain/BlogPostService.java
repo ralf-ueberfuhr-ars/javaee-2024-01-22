@@ -13,6 +13,7 @@ public class BlogPostService {
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
+  // TODO externalize
   {
     this.add(
       BlogPost
@@ -30,10 +31,13 @@ public class BlogPostService {
     );
   }
 
+  // TODO findAllByTitle
+  // TODO Stream
   public Collection<BlogPost> findAll() {
     return blogPosts.values();
   }
 
+  // TODO Optional
   public BlogPost findById(UUID id) {
     return blogPosts.get(id);
   }

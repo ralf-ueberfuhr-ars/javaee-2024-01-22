@@ -11,24 +11,6 @@ public class BlogPostService {
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
-  // TODO externalize
-  {
-    this.add(
-      BlogPost
-        .builder()
-        .title("Mein erster BlogPost mit CDI")
-        .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
-        .build()
-    );
-    this.add(
-      BlogPost
-        .builder()
-        .title("Mein zweiter BlogPost")
-        .content("Tralala")
-        .build()
-    );
-  }
-
   public Stream<BlogPost> findAll() {
     return blogPosts.values().stream();
   }

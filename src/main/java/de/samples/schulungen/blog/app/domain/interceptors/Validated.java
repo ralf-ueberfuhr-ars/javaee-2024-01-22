@@ -1,4 +1,4 @@
-package de.samples.schulungen.blog.app.domain;
+package de.samples.schulungen.blog.app.domain.interceptors;
 
 import jakarta.interceptor.InterceptorBinding;
 import java.lang.annotation.ElementType;

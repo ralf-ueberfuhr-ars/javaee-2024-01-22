@@ -1,8 +1,8 @@
 package de.samples.schulungen.blog.app.domain;
 
+import de.samples.schulungen.blog.app.domain.interceptors.PublishEvent;
+import de.samples.schulungen.blog.app.domain.interceptors.Validated;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
@@ -16,10 +16,6 @@ import java.util.stream.Stream;
 @ApplicationScoped
 //@RequiredArgsConstructor(onConstructor_ = @Inject)
 public class BlogPostService {
-
-  // TODO interceptor
-  @Inject
-  Event<BlogPostCreatedEvent> eventPublisher;
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
@@ -46,8 +42,6 @@ public class BlogPostService {
     post.setId(UUID.randomUUID());
     post.setTimestamp(LocalDateTime.now());
     blogPosts.put(post.getId(), post);
-    BlogPostCreatedEvent event = new BlogPostCreatedEvent(post);
-    eventPublisher.fire(event);
   }
 
   public void remove(UUID id) {

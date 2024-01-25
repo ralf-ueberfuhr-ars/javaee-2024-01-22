@@ -1,25 +1,21 @@
 package de.samples.schulungen.blog.app.domain;
 
+import de.samples.schulungen.blog.app.domain.interceptors.PublishEvent;
+import de.samples.schulungen.blog.app.domain.interceptors.Validated;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Event;
-import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Validator;
+import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Stream;
 
+@Validated
 @ApplicationScoped
 //@RequiredArgsConstructor(onConstructor_ = @Inject)
 public class BlogPostService {
-
-  // TODO interceptor
-  @Inject
-  /*private final*/ Validator validator;
-  @Inject
-  Event<BlogPostCreatedEvent> eventPublisher;
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
@@ -40,17 +36,12 @@ public class BlogPostService {
     return Optional.ofNullable(blogPosts.get(id));
   }
 
-  public void add(BlogPost post) {
-    Set<ConstraintViolation<BlogPost>> violations = validator.validate(post);
-    if(violations.isEmpty()) {
-      post.setId(UUID.randomUUID());
-      post.setTimestamp(LocalDateTime.now());
-      blogPosts.put(post.getId(), post);
-      BlogPostCreatedEvent event = new BlogPostCreatedEvent(post);
-      eventPublisher.fire(event);
-    } else {
-      throw new ConstraintViolationException(violations);
-    }
+
+  @PublishEvent(BlogPostCreatedEvent.class)
+  public void add(@Valid BlogPost post) {
+    post.setId(UUID.randomUUID());
+    post.setTimestamp(LocalDateTime.now());
+    blogPosts.put(post.getId(), post);
   }
 
   public void remove(UUID id) {

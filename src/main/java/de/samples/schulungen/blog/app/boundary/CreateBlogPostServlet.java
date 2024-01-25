@@ -41,6 +41,7 @@ public class CreateBlogPostServlet extends HttpServlet {
     } catch(ConstraintViolationException ex) {
       // ex.getConstraintViolations() ..
       resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "invalid blog post");
+      return;
     }
     // Response
     resp.sendRedirect("list-blogposts");

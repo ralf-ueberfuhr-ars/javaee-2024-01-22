@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class BlogPostInitializer {
 
   private final BlogPostService service;
-  private final Instance<BlogPost> blogPosts;
+  private final Instance<BlogPostProvider> blogPosts;
 
   public void init(
     @Observes
@@ -22,6 +22,7 @@ public class BlogPostInitializer {
     if (service.count() < 1) {
       blogPosts
         .stream()
+        .map(BlogPostProvider::get)
         .forEach(service::add);
     }
   }

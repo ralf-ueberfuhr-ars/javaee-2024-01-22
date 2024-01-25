@@ -13,9 +13,9 @@ class BlogPostInitializerTest {
   @Test
   void shouldAddWelcomeBlogPostsToService() {
     // Setup / Arrange / Given
-    Instance<BlogPost> blogPosts = mock(Instance.class);
+    Instance<BlogPostProvider> blogPosts = mock(Instance.class);
     when(blogPosts.stream()).thenReturn(Stream.of(
-      BlogPost.builder().build()
+      () -> BlogPost.builder().build()
     ));
     BlogPostService service = mock(BlogPostService.class);
     BlogPostInitializer sut = new BlogPostInitializer(service, blogPosts);
@@ -29,9 +29,9 @@ class BlogPostInitializerTest {
   @Test
   void shouldNotAddWelcomeBlogPostsWhenAlreadyExisting() {
     // Setup / Arrange / Given
-    Instance<BlogPost> blogPosts = mock(Instance.class);
+    Instance<BlogPostProvider> blogPosts = mock(Instance.class);
     when(blogPosts.stream()).thenReturn(Stream.of(
-      BlogPost.builder().build()
+      () -> BlogPost.builder().build()
     ));
     BlogPostService service = mock(BlogPostService.class);
     BlogPostInitializer sut = new BlogPostInitializer(service, blogPosts);

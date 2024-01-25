@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.ConstraintViolationException;
 
 import java.io.IOException;
 
@@ -35,7 +36,12 @@ public class CreateBlogPostServlet extends HttpServlet {
       return;
     }
     // Action
-    service.add(newBlogPost);
+    try {
+      service.add(newBlogPost);
+    } catch(ConstraintViolationException ex) {
+      // ex.getConstraintViolations() ..
+      resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "invalid blog post");
+    }
     // Response
     resp.sendRedirect("list-blogposts");
   }

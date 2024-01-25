@@ -8,8 +8,8 @@ public class DomainWelcomeBlogPosts {
 
   @Produces
   @ApplicationScoped
-  public BlogPost firstBlogPost() {
-    return BlogPost
+  public BlogPostProvider firstBlogPost() {
+    return () -> BlogPost
       .builder()
       .title("Mein erster BlogPost mit Producer Method")
       .content("Ich weiss dass b<script>alert('Ätschbätsch');</script>c.")
@@ -18,11 +18,11 @@ public class DomainWelcomeBlogPosts {
 
   @Produces
   @ApplicationScoped
-  public BlogPost secondBlogPost() {
-    return BlogPost
+  public BlogPostProvider secondBlogPost() {
+    return () -> BlogPost
       .builder()
       .title("Mein zweiter BlogPost")
-      .content("Tralala")
+      .content("Tralalalalalal")
       .build();
   }
 

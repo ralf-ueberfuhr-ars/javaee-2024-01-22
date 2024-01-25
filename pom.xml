@@ -19,6 +19,7 @@
     <jakarta.servlet.jsp.jstl-api.version>2.0.0</jakarta.servlet.jsp.jstl-api.version>
     <junit-bom.version>5.10.1</junit-bom.version>
     <mockito-bom.version>5.9.0</mockito-bom.version>
+    <jakarta.faces.stage>Development</jakarta.faces.stage>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -132,6 +133,7 @@
                 <project.name>${final.name}</project.name>
                 <jwt.issuer>https://server.example.com</jwt.issuer>
                 <app.context.root>/</app.context.root>
+                <app.faces.stage>${jakarta.faces.stage}</app.faces.stage>
               </bootstrapProperties>
             </configuration>
           </plugin>

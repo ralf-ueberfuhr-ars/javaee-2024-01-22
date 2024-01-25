@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+
+<h:head>
+  <title>Component Tree Sample</title>
+</h:head>
+
+<h:body>
+  <h1>Component Tree Sample</h1>
+  <h2>Input Dates</h2>
+  <h:form>
+    <div>
+      <h:outputLabel for="txtStartDate" value="Start Date"/>
+      <h:inputText
+        id="txtStartDate"
+        p:type="date"
+        required="true"
+        value="#{componentTreeSampleInput.startDate}"
+        binding="#{componentTreeSampleBackingBean.dateFieldsValidator.startDateComponent}"
+      />
+      <h:message for="txtStartDate"/>
+    </div>
+    <div>
+      <h:outputLabel for="txtEndDate" value="Content"/>
+      <h:inputText
+        id="txtEndDate"
+        p:type="date"
+        required="true"
+        value="#{componentTreeSampleInput.endDate}"
+        validator="#{componentTreeSampleBackingBean.dateFieldsValidator.validate}"
+      />
+      <h:message for="txtEndDate"/>
+    </div>
+    <h:commandButton actionListener="#{componentTreeSampleBackingBean.calculate()}" value="Calculate"/>
+    <h:messages globalOnly="true"/>
+  </h:form>
+  <h2>Calculated Difference</h2>
+  Calculated Difference (days): <h:outputText id="txtResult"/>
+</h:body>
+</html>

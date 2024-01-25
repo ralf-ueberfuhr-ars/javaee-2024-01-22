@@ -1,12 +1,11 @@
 package de.samples.schulungen.blog.app.domain;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -19,6 +18,8 @@ public class BlogPostService {
   // TODO interceptor
   @Inject
   /*private final*/ Validator validator;
+  @Inject
+  Event<BlogPostCreatedEvent> eventPublisher;
 
   private final Map<UUID, BlogPost> blogPosts = new HashMap<>();
 
@@ -45,6 +46,8 @@ public class BlogPostService {
       post.setId(UUID.randomUUID());
       post.setTimestamp(LocalDateTime.now());
       blogPosts.put(post.getId(), post);
+      BlogPostCreatedEvent event = new BlogPostCreatedEvent(post);
+      eventPublisher.fire(event);
     } else {
       throw new ConstraintViolationException(violations);
     }

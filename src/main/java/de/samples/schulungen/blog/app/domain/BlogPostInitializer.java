@@ -22,6 +22,7 @@ public class BlogPostInitializer {
     if (service.count() < 1) {
       blogPosts
         .stream()
+        .filter(bp -> bp.getTitle() != null)
         .forEach(service::add);
     }
   }

@@ -1,5 +1,6 @@
-package de.samples.schulungen.blog.app.domain;
+package de.samples.schulungen.blog.app.domain.interceptors;
 
+import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -8,9 +9,12 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
+
+import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.stream.Stream;
 
+@Priority(3)
 @Validated
 @Interceptor
 public class ValidatedInterceptor {
@@ -20,8 +24,8 @@ public class ValidatedInterceptor {
 
   @AroundInvoke
   public Object validateMethodParameters(InvocationContext ic) throws Exception {
-    final var paramAnnotations = ic.getMethod().getParameterAnnotations();
-    final var paramValues = ic.getParameters();
+    final Annotation[][] paramAnnotations = ic.getMethod().getParameterAnnotations();
+    final Object[] paramValues = ic.getParameters();
     for (int i = 0; i < paramAnnotations.length; i++) {
       boolean shouldValidate = Stream.of(paramAnnotations[i])
         .anyMatch(Valid.class::isInstance);

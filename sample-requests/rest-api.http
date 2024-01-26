@@ -1,0 +1,77 @@
+GET {{endpoint}}/blogposts
+Accept: application/json
+
+> {%
+  client.test("should work", () => {
+    client.assert(response.status === 200);
+    //client.assert(response.body['title'] !== undefined);
+  });
+%}
+
+###
+
+GET {{endpoint}}/blogposts
+Accept: application/xml
+
+> {%
+  client.test("should work", () => {
+    client.assert(response.status === 406);
+  });
+%}
+
+###
+
+POST {{endpoint}}/blogposts
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "ABC",
+  "content": ""
+}
+
+> {%
+  client.test("should work", () => {
+    client.assert(response.status === 400);
+  });
+%}
+###
+
+POST {{endpoint}}/blogposts
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "ABC",
+  "content": "lerkdhsisjd"
+}
+
+> {%
+  client.test("should work", () => {
+    client.assert(response.status === 201);
+    client.assert(response.headers.valueOf("Location") !== undefined);
+  });
+  client.global.set('blogPostUrl', response.headers.valueOf("Location"));
+  client.global.set('blogPostId', response.body['id']);
+%}
+
+###
+GET {{blogPostUrl}}
+Accept: application/json
+
+> {%
+  client.test("should work", () => {
+    client.assert(response.status === 200);
+  });
+%}
+
+###
+GET {{endpoint}}/blogposts/ac6d9972-18db-40a7-923c-a9d612d5c6a5
+Accept: application/json
+
+> {%
+  client.test("should work", () => {
+    client.assert(response.status === 404);
+  });
+%}
+
